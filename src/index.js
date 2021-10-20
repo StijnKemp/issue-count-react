@@ -1,4 +1,6 @@
 import React from "react";
 import { render } from "react-dom";
+import App from "./App";
+import "./scss/style.scss";
 
-render(<h1>React is working!</h1>, document.getElementById("app"));
+render(<App />, document.getElementById("app"));
