@@ -1,12 +1,8 @@
-* {
-  box-sizing: border-box;
+// Base.
+@use "./base/reset";
+@use "./base/typography";
+@use "./base/page";
 
-  &::before,
-  &::after {
-    box-sizing: inherit;
-  }
-}
-
-body {
-  margin: 0;
-}
+// Components.
+@use "./components/table";
+@use "./components/button";

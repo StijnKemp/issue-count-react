@@ -1,0 +1,33 @@
+@use "../lib/colors" as color;
+
+table {
+  border-spacing: 0;
+  border-bottom: 3px solid color.$primary;
+
+  thead {
+    background-color: color.$primary;
+    color: #ffffff;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+  }
+
+  tbody tr:hover {
+    color: color.$primary;
+    font-weight: 700;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f3f3f3;
+  }
+
+  td,
+  th {
+    padding: 0.7em 1em;
+    min-width: 200px;
+  }
+
+  th {
+    text-align: left;
+    cursor: pointer;
+  }
+}
