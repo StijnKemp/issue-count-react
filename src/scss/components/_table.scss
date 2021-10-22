@@ -1,23 +1,28 @@
 @use "../lib/colors" as color;
 
 table {
+  min-width: 100%;
   border-spacing: 0;
   border-bottom: 3px solid color.$primary;
 
   thead {
     background-color: color.$primary;
-    color: #ffffff;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
+    color: color.$bg;
   }
 
-  tbody tr:hover {
-    color: color.$primary;
-    font-weight: 700;
+  tbody tr {
+    &:hover {
+      color: color.$primary;
+      font-weight: 700;
+    }
+
+    td {
+      border-bottom: 1px solid color.$bg-600;
+    }
   }
 
   tr:nth-child(even) {
-    background-color: #f3f3f3;
+    background-color: color.$bg-500;
   }
 
   td,
