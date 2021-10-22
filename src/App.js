@@ -1,14 +1,10 @@
 import React, { useState } from "react";
 import Table from "./components/Table";
-import useFileReader from "./helpers/hooks/useFileReader";
-import parseCSV from "./helpers/utils/parseCSV";
+import useFilerReader from "./helpers/hooks/useFileReader";
 
 const App = () => {
-  const [table, setTable] = useState();
-
-  const fileReader = useFileReader(() => {
-    setTable(parseCSV({ csv: fileReader.result, splitter: ";" }));
-  });
+  const [csv, setCSV] = useState();
+  const fileReader = useFilerReader(() => setCSV(fileReader.result));
 
   const onChangeFile = (e) => {
     fileReader.readAsText(e.target.files[0]);
@@ -29,13 +25,7 @@ const App = () => {
         multiple={false}
         onChange={onChangeFile}
       />
-      {table && (
-        <Table
-          head={table.head}
-          body={table.body}
-          setBody={(body) => setTable({ ...table, body })}
-        />
-      )}
+      <Table csv={csv} />
     </div>
   );
 };
