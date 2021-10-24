@@ -1,0 +1,15 @@
+@use "../lib/mixins";
+
+%btn {
+  all: unset;
+  padding: 1em 1.5em;
+  border-radius: 3px;
+  font-weight: 700;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.btn-primary {
+  @extend %btn;
+  @include mixins.bg-primary;
+}

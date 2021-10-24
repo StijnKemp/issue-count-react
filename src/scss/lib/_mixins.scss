@@ -1,0 +1,6 @@
+@use "../lib/colors" as color;
+
+@mixin bg-primary {
+  background-color: color.$primary;
+  color: color.$bg;
+}
