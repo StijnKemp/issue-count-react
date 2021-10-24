@@ -1,13 +1,13 @@
 export function sortFirstName(a, b) {
-  const nameA = a.first_name.toUpperCase();
-  const nameB = b.first_name.toUpperCase();
+  const nameA = a.first_name.toLowerCase();
+  const nameB = b.first_name.toLowerCase();
 
   return sortString(nameA, nameB);
 }
 
 export function sortSurName(a, b) {
-  const nameA = a.sur_name.toUpperCase().split(" ");
-  const nameB = b.sur_name.toUpperCase().split(" ");
+  const nameA = a.sur_name.toLowerCase().split(" ");
+  const nameB = b.sur_name.toLowerCase().split(" ");
   const indexA = nameA.length - 1;
   const indexB = nameB.length - 1;
 

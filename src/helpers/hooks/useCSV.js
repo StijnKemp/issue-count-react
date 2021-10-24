@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { parseCSV } from "../utils/csv";
 import {
   sortFirstName,
@@ -7,13 +7,15 @@ import {
   sortDateOfBirth,
 } from "../utils/sort";
 
-function useCSV(csv, initSortBy = "sur_name") {
+function useCSV(csv, initSort = "sur_name") {
   const [head, setHead] = useState();
   const [data, setData] = useState();
+  const [lastSorted, setLastSorted] = useState();
 
   useEffect(() => {
     if (csv) {
       const table = parseCSV(csv);
+
       setHead(table.head);
       setData(table.data);
     }
@@ -21,36 +23,42 @@ function useCSV(csv, initSortBy = "sur_name") {
 
   useEffect(() => {
     if (head) {
-      sortBy(initSortBy);
+      sortBy(initSort);
     }
   }, [head]);
 
-  const sortBy = (col, order = "asc") => {
-    let sorted;
-    switch (col) {
-      case "first_name":
-        sorted = data.sort(sortFirstName);
-        break;
-      case "sur_name":
-        sorted = data.sort(sortSurName);
-        break;
-      case "issue_count":
-        sorted = data.sort(sortIssueCount);
-        break;
-      case "date_of_birth":
-        sorted = data.sort(sortDateOfBirth);
-        break;
-      default:
-        sorted = data;
-        break;
-    }
+  const sortBy = useCallback(
+    (col) => {
+      let sorted;
 
-    if (order === "desc") {
-      sorted.reverse();
-    }
+      if (lastSorted === col) {
+        sorted = [...data];
+        sorted.reverse();
+      } else {
+        switch (col) {
+          case "first_name":
+            sorted = data.sort(sortFirstName);
+            break;
+          case "sur_name":
+            sorted = data.sort(sortSurName);
+            break;
+          case "issue_count":
+            sorted = data.sort(sortIssueCount);
+            break;
+          case "date_of_birth":
+            sorted = data.sort(sortDateOfBirth);
+            break;
+          default:
+            sorted = data;
+            break;
+        }
+      }
 
-    setData([...sorted]);
-  };
+      setLastSorted(col);
+      setData([...sorted]);
+    },
+    [data, lastSorted]
+  );
 
   return { head, data, sortBy };
 }
