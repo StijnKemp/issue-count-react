@@ -1,5 +1,5 @@
-import React, { useEffect, useMemo } from "react";
-import useCSV from "../helpers/hooks/useCSV";
+import React from "react";
+import useCSV from "#/helpers/hooks/useCSV";
 
 const Table = ({ csv }) => {
   const { head, data, sortBy } = useCSV(csv);
