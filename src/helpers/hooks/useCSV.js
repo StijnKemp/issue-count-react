@@ -7,10 +7,16 @@ import {
   sortDateOfBirth,
 } from "#/helpers/utils/sort";
 
+const startDirection = "asc";
+const invertDirection = {
+  asc: "desc",
+  desc: "asc",
+};
+
 function useCSV(csv, initSort = "sur_name") {
   const [head, setHead] = useState();
   const [data, setData] = useState();
-  const [lastSorted, setLastSorted] = useState();
+  const [lastSorted, setLastSorted] = useState({ col: null, direction: null });
 
   useEffect(() => {
     if (csv) {
@@ -31,9 +37,13 @@ function useCSV(csv, initSort = "sur_name") {
     (col) => {
       let sorted;
 
-      if (lastSorted === col) {
+      if (lastSorted.col === col) {
         sorted = [...data];
         sorted.reverse();
+        setLastSorted({
+          col,
+          direction: invertDirection[lastSorted.direction],
+        });
       } else {
         switch (col) {
           case "first_name":
@@ -52,15 +62,16 @@ function useCSV(csv, initSort = "sur_name") {
             sorted = data;
             break;
         }
+
+        setLastSorted({ col, direction: startDirection });
       }
 
-      setLastSorted(col);
       setData([...sorted]);
     },
     [data, lastSorted]
   );
 
-  return { head, data, sortBy };
+  return { head, data, lastSorted, sortBy };
 }
 
 export default useCSV;

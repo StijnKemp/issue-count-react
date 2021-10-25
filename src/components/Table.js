@@ -1,8 +1,14 @@
 import React from "react";
 import useCSV from "#/helpers/hooks/useCSV";
+import { FaAngleDown, FaAngleUp } from "react-icons/fa";
+
+const angleIcon = {
+  asc: <FaAngleUp />,
+  desc: <FaAngleDown />,
+};
 
 const Table = ({ csv }) => {
-  const { head, data, sortBy } = useCSV(csv);
+  const { head, data, lastSorted, sortBy } = useCSV(csv);
 
   if (data) {
     return (
@@ -12,6 +18,7 @@ const Table = ({ csv }) => {
             {head.map((col, i) => (
               <th key={i} onClick={() => sortBy(col)}>
                 {col}
+                {col === lastSorted.col && angleIcon[lastSorted.direction]}
               </th>
             ))}
           </tr>

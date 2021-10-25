@@ -1,4 +1,5 @@
 @use "../lib/mixins";
+@use "../lib/colors" as color;
 
 %btn {
   all: unset;
@@ -12,4 +13,12 @@
 .btn-primary {
   @extend %btn;
   @include mixins.bg-primary;
+
+  &:hover {
+    background-color: darken($color: color.$primary, $amount: 5%);
+  }
+
+  &:active {
+    background-color: darken($color: color.$primary, $amount: 10%);
+  }
 }

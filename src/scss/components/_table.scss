@@ -35,5 +35,10 @@ table {
   th {
     text-align: left;
     cursor: pointer;
+
+    svg {
+      margin-left: 1em;
+      vertical-align: sub;
+    }
   }
 }
