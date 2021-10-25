@@ -1,6 +1,7 @@
 import React from "react";
 import useCSV from "#/helpers/hooks/useCSV";
-import { FaAngleDown, FaAngleUp } from "react-icons/fa";
+import { FaAngleDown } from "@react-icons/all-files/fa/FaAngleDown";
+import { FaAngleUp } from "@react-icons/all-files/fa/FaAngleUp";
 
 const angleIcon = {
   asc: <FaAngleUp />,
