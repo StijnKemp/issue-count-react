@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import Table from "./components/Table";
 import UploadButton from "./components/UploadButton";
-import useFilerReader from "#/helpers/hooks/useFileReader";
+import useFileReader from "#/helpers/hooks/useFileReader";
 
 const App = () => {
   const [csv, setCSV] = useState();
-  const fileReader = useFilerReader(() => {
+  const fileReader = useFileReader(() => {
     setCSV(fileReader.result);
   });
 
